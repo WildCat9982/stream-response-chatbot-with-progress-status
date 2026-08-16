@@ -27,7 +27,7 @@ DEMO_HTML = """<!doctype html>
     --header-2: #5f4fca;
     --bubble-user: #6d5efc;
     --bubble-user-text: #ffffff;
-    --bubble-assistant: #f3f3fb;
+    --bubble-assistant: #3f3f46;
     --shadow: 0 20px 45px -20px rgba(45, 40, 90, 0.35);
   }
 
@@ -51,9 +51,7 @@ DEMO_HTML = """<!doctype html>
     max-height: calc(100vh - 48px);
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: #e5e5ea;
     border-radius: 20px;
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -77,7 +75,7 @@ DEMO_HTML = """<!doctype html>
     width: 36px;
     height: 4px;
     border-radius: 999px;
-    background: var(--border);
+    background: #9a9aa2;
     transition: background 0.15s ease;
   }
 
@@ -95,20 +93,20 @@ DEMO_HTML = """<!doctype html>
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    padding: 12px 18px;
+    padding: 6px 16px;
     background: linear-gradient(120deg, var(--header-1), var(--header-2));
     color: #fff;
   }
 
   .minimize-btn {
     flex: none;
-    align-self: flex-start;
+    align-self: center;
     margin: 0;
-    width: 40px;
-    height: 14px;
-    border-radius: 7px;
-    border: none;
-    background: rgba(255, 255, 255, 0.22);
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
     color: #fff;
     font-size: 0.7rem;
     line-height: 1;
@@ -116,11 +114,19 @@ DEMO_HTML = """<!doctype html>
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
 
   .minimize-btn:hover {
-    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .minimize-btn::before {
+    content: "";
+    width: 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: #fff;
   }
 
   .robot-icon {
@@ -192,6 +198,10 @@ DEMO_HTML = """<!doctype html>
     flex-direction: column;
     gap: 14px;
     scroll-behavior: smooth;
+    background-color: #efeafd;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cg fill='none' stroke='%235b4ce4' stroke-width='1.5' opacity='0.12'%3E%3Cpath d='M14 16h24a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H24l-7 7v-7h-3a5 5 0 0 1-5-5V21a5 5 0 0 1 5-5z'/%3E%3Ccircle cx='66' cy='58' r='6'/%3E%3Cpath d='M55 72l5-5M65 72l-5-5' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='72' r='2.5' fill='%235b4ce4' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 90px 90px;
   }
 
   .row { display: flex; }
@@ -200,11 +210,19 @@ DEMO_HTML = """<!doctype html>
 
   .bubble {
     max-width: 82%;
-    padding: 10px 14px;
+    padding: 5px 8px;
     border-radius: 10px;
     font-size: 0.92rem;
     line-height: 1.5;
     animation: rise 0.25s ease;
+  }
+
+  .msg-time {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 0.65rem;
+    opacity: 0.7;
+    vertical-align: bottom;
   }
 
   .row.user .bubble {
@@ -214,7 +232,7 @@ DEMO_HTML = """<!doctype html>
   }
 
   .row.assistant .bubble {
-    background: var(--bubble-user);
+    background: var(--bubble-assistant);
     color: var(--bubble-user-text);
     border-bottom-left-radius: 2px;
     width: 100%;
@@ -239,7 +257,7 @@ DEMO_HTML = """<!doctype html>
 
   .row.assistant .group-chevron {
     background: rgba(255, 255, 255, 0.9);
-    color: var(--bubble-user);
+    color: var(--bubble-assistant);
   }
 
   .row.assistant .spinner {
@@ -274,10 +292,6 @@ DEMO_HTML = """<!doctype html>
 
   .row.assistant .cursor {
     background: #fff;
-  }
-
-  .row.assistant .total-time {
-    color: rgba(255, 255, 255, 0.75);
   }
 
   .group {
@@ -391,12 +405,6 @@ DEMO_HTML = """<!doctype html>
     white-space: pre-wrap;
   }
 
-  .total-time {
-    margin-top: 8px;
-    font-size: 0.72rem;
-    color: var(--muted);
-  }
-
   .cursor {
     display: inline-block;
     width: 2px;
@@ -412,14 +420,14 @@ DEMO_HTML = """<!doctype html>
     flex: none;
     display: flex;
     gap: 8px;
-    padding: 16px 20px;
+    padding: 8px 10px;
     border-top: 1px solid var(--border);
     background: #fbfbfe;
   }
 
   input {
     flex: 1;
-    padding: 10px 16px;
+    padding: 6px 12px;
     border-radius: 999px;
     border: 1px solid var(--border);
     font-size: 0.78rem;
@@ -499,7 +507,7 @@ DEMO_HTML = """<!doctype html>
         <p>Server-sent events, grouped progress updates</p>
       </div>
       <span class="robot-icon">🤖</span>
-      <button class="minimize-btn" id="minimizeBtn" type="button" aria-label="Minimize">−</button>
+      <button class="minimize-btn" id="minimizeBtn" type="button" aria-label="Minimize"></button>
     </div>
     <div id="chat"></div>
     <form id="form">
@@ -574,12 +582,32 @@ resizeHandle.addEventListener('pointerup', () => {
   appEl.style.transition = '';
 });
 
+function formatTime() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  return `${hh}:${mm}`;
+}
+
+function makeMsgTime() {
+  const timeEl = document.createElement('div');
+  timeEl.className = 'msg-time';
+  timeEl.textContent = formatTime();
+  return timeEl;
+}
+
 function addUserBubble(text) {
   const row = document.createElement('div');
   row.className = 'row user';
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
-  bubble.textContent = text;
+
+  const textEl = document.createElement('span');
+  textEl.className = 'bubble-text';
+  textEl.textContent = text;
+
+  bubble.appendChild(textEl);
+  bubble.appendChild(makeMsgTime());
   row.appendChild(bubble);
   chat.appendChild(row);
 }
@@ -753,12 +781,7 @@ function startStream(query) {
       if (stillExecuting) stillExecuting.classList.remove('executing');
     });
     cursor.remove();
-
-    const totalSeconds = ((performance.now() - streamStart) / 1000).toFixed(1);
-    const totalTime = document.createElement('div');
-    totalTime.className = 'total-time';
-    totalTime.textContent = `Completed in ${totalSeconds}s`;
-    bubble.appendChild(totalTime);
+    bubble.appendChild(makeMsgTime());
 
     es.close();
     sendBtn.disabled = false;
