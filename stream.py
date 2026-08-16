@@ -192,7 +192,7 @@ DEMO_HTML = """<!doctype html>
   #chat {
     flex: 1;
     min-height: 0;
-    padding: 20px;
+    padding: 10px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
