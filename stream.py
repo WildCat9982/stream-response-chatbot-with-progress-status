@@ -27,7 +27,7 @@ DEMO_HTML = """<!doctype html>
     --header-2: #5f4fca;
     --bubble-user: #6d5efc;
     --bubble-user-text: #ffffff;
-    --bubble-assistant: #3f3f46;
+    --bubble-assistant: #26262b;
     --shadow: 0 20px 45px -20px rgba(45, 40, 90, 0.35);
   }
 
@@ -309,7 +309,7 @@ DEMO_HTML = """<!doctype html>
     background: rgba(109, 94, 252, 0.08);
     border: 1px solid rgba(109, 94, 252, 0.3);
     border-radius: 999px;
-    padding: 5px 8px 5px 10px;
+    padding: 2.5px 4px 2.5px 5px;
     cursor: pointer;
     user-select: none;
     transition: background 0.15s ease;
@@ -634,7 +634,7 @@ function addAssistantBubble() {
 
 function addGroup(bubble, before) {
   const el = document.createElement('div');
-  el.className = 'group expanded';
+  el.className = 'group';
 
   const header = document.createElement('div');
   header.className = 'group-header';
