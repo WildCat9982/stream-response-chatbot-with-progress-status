@@ -43,16 +43,16 @@ DEMO_HTML = """<!doctype html>
 
   .app {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 0;
+    right: 0;
     width: 360px;
-    max-width: calc(100vw - 32px);
+    max-width: 100vw;
     height: 90vh;
-    max-height: calc(100vh - 48px);
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     background: #e5e5ea;
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: var(--shadow);
     overflow: hidden;
     border: 1px solid var(--border);
@@ -136,8 +136,8 @@ DEMO_HTML = """<!doctype html>
 
   .app.minimized {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 0;
+    right: 0;
     width: 84px;
     height: 84px;
     border-radius: 50%;
@@ -571,7 +571,7 @@ resizeHandle.addEventListener('pointermove', (e) => {
   if (!resizing) return;
   const delta = resizeStartY - e.clientY;
   const newHeight = Math.min(
-    window.innerHeight - 48,
+    window.innerHeight,
     Math.max(320, resizeStartHeight + delta)
   );
   appEl.style.height = `${newHeight}px`;
